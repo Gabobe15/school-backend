@@ -5,10 +5,13 @@ urlpatterns = [
     path('forgot-password/', views.ForgotPasswordAPIView.as_view(), name="forgot-password"),
     path('verify-token/<slug:token>/', views.VerifyTokenAPIView.as_view(), name="verify-token"),
     path('reset-password/', views.ResetPasswordAPIView.as_view(), name="reset-password"),
+    
     path('users/', views.UserListView.as_view(), name="auth-users-list"),
+    path('single-user/<int:pk>/', views.UserDetailView.as_view(), name='user-detail'),
     path('inactive/', views.InactiveListView.as_view(), name="inactive-users-list"),
-    path('update-user/<int:pk>/', views.UpdateUserView.as_view(), name="update-user"),
+    
     path('register/', views.RegisterUser.as_view(), name="auth-register"),
+    path('update-user/<int:pk>/', views.UpdateUserView.as_view(), name="update-user"),
     path('login/', views.LoginView.as_view(), name="auth-login"),
     path('user/', views.UserAPI.as_view(), name="auth-user"),
     path('change-password/', views.ChangePasswordView.as_view(), name='change-password'),

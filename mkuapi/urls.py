@@ -1,7 +1,7 @@
 from rest_framework import routers
 from .views import StudentsViewSet,StudentInActiveSet
 from django.urls import path, include
-# from . import views
+from . import views
 
 
 router = routers.DefaultRouter()
@@ -11,6 +11,8 @@ router.register('inactive',StudentInActiveSet , 'students')
 
 urlpatterns = [
     path('', include(router.urls)),
+    path('single-student/<int:pk>/', views.StudentDetailView.as_view(), name='student-detail'),
+
 ]
 
 # urlpatterns = [

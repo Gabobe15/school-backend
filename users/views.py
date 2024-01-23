@@ -46,6 +46,14 @@ class UserListView(generics.ListAPIView):
     ordering_fields = ['first_name', 'last_name', 'role', 'location', 'mobile', 'email']
     queryset = User.objects.filter(is_active=True, is_superuser=False).order_by('-id')
     
+# Detail view -- single user view
+class UserDetailView(generics.RetrieveAPIView):
+    permission_classes = [
+        permissions.AllowAny,
+    ] 
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    
 class InactiveListView(generics.ListAPIView):
     permission_classes = [ permissions.AllowAny, ] 
     serializer_class = UserSerializer
