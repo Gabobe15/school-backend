@@ -6,7 +6,7 @@ from . import views
 
 router = routers.DefaultRouter()
 # url, views, name 
-router.register('students', StudentsViewSet, 'students')
+router.register('students/<int:pk>/', StudentsViewSet, 'students')
 router.register('inactive',StudentInActiveSet , 'students')
 
 urlpatterns = [

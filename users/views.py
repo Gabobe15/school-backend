@@ -44,7 +44,18 @@ class UserListView(generics.ListAPIView):
     filterset_fields = ['first_name', 'last_name', 'role', 'location', 'mobile', 'email']
     search_fields = ['first_name', 'last_name', 'role', 'location', 'mobile', 'email']
     ordering_fields = ['first_name', 'last_name', 'role', 'location', 'mobile', 'email']
-    queryset = User.objects.filter(is_active=True, is_superuser=False).order_by('-id')
+    # queryset = User.objects.filter(is_active=True, is_superuser=False).order_by('-id')
+    
+    def get_queryset(self, *args, **kwargs):
+        users = User.objects.filter(is_active=True, is_superuser=False).order_by('-id')
+
+        # Role Filters
+        role = self.request.query_params.get('role',None)
+
+        if role:
+            users = users.filter(role=role)
+
+        return users
     
 # Detail view -- single user view
 class UserDetailView(generics.RetrieveAPIView):
