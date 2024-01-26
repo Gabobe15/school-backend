@@ -8,6 +8,7 @@ class Student(models.Model):
     course = models.CharField(max_length=100, blank=True)
     email = models.CharField(max_length=100, unique=True, blank=True)
     contact = models.CharField(max_length=100, default=1, blank=True)
+    role = models.CharField(max_length=255, default='')
     is_active = models.BooleanField(default=True)
     date_reg = models.DateTimeField(default=timezone.now)
 

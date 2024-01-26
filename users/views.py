@@ -41,9 +41,9 @@ class UserListView(generics.ListAPIView):
     pagination_class = CustomPageNumberPagination
 
     filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
-    filterset_fields = ['first_name', 'last_name', 'role', 'location', 'mobile', 'email']
-    search_fields = ['first_name', 'last_name', 'role', 'location', 'mobile', 'email']
-    ordering_fields = ['first_name', 'last_name', 'role', 'location', 'mobile', 'email']
+    filterset_fields = ['first_name', 'last_name', 'location', 'mobile', 'email']
+    search_fields = ['first_name', 'last_name', 'location', 'mobile', 'email']
+    ordering_fields = ['first_name', 'last_name', 'location', 'mobile', 'email']
     # queryset = User.objects.filter(is_active=True, is_superuser=False).order_by('-id')
     
     def get_queryset(self, *args, **kwargs):
