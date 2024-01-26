@@ -26,7 +26,19 @@ class StudentListView(generics.ListAPIView):
     filterset_fields = ['regno', 'fullname', 'course', 'email', 'contact']
     search_fields = ['regno', 'fullname', 'course', 'email', 'contact']
     ordering_fields = ['regno', 'fullname', 'course', 'email', 'contact']
-    queryset = Student.objects.filter(is_active=True).order_by('-id')
+    # queryset = Student.objects.filter(is_active=True).order_by('-id')
+    
+    def get_queryset(self, *args, **kwargs):
+        std = Student.objects.filter(is_active=True).order_by('-id')
+
+        # Role Filters
+        role = self.request.query_params.get('role',None)
+
+        if role:
+            std = std.filter(role=role)
+
+        return std
+    
     
 class InactiveListView(generics.ListAPIView):
     permission_classes = [permissions.AllowAny]
