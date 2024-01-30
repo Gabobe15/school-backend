@@ -53,6 +53,8 @@ class InactiveListView(generics.ListAPIView):
     ordering_fields = ['regno', 'fullname', 'course', 'email', 'contact']
     queryset = Student.objects.filter(is_active=False).order_by('-id')
 
+
+
 class AddStudent(generics.GenericAPIView):
     permission_classes = [
         permissions.AllowAny,
@@ -79,6 +81,23 @@ class StudentDetailView(generics.RetrieveAPIView):
     queryset = Student.objects.all()
     serializer_class = StudentSerializer   
 
+
+# Detail view by regno
+class StudentDetailViewByRegno(generics.RetrieveAPIView):
+    permission_classes = [
+        permissions.AllowAny,
+    ] 
+
+    def retrieve(self, request, *args, **kwargs):
+        regno = kwargs['regno']
+
+        student = Student.objects.filter(regno=regno).first()
+
+        return Response(
+            StudentSerializer(student, context=self.get_serializer_context()).data, 
+        )
+        
+        
 # Update user
 class UpdateStudentView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Student.objects.all()

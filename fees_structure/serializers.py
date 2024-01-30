@@ -4,4 +4,4 @@ from rest_framework import serializers
 class FeesStructureSerializer(serializers.ModelSerializer):
     class Meta:
         model = FeesStructure
-        fields = ['id', 'regno','fees', 'payment', 'balance', 'is_active']
+        fields = ['id','student', 'payment_date', 'amount']
